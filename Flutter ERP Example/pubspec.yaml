@@ -1,0 +1,19 @@
+name: flutter_erp_ui
+description: A simple ERP front UI for Windows made with Flutter
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fluent_ui: ^4.7.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
