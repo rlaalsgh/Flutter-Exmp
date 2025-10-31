@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart'
     show DataTable, DataRow, DataCell, DataColumn;
+import 'package:flutter_erp_ui/core/notification_service.dart'; // ✅ 알림 서비스 추가
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -36,12 +37,12 @@ class _DashboardPageState extends State<DashboardPage> {
     setState(() {
       salesData = salesData.map((v) => v + _rnd.nextDouble() * 2 - 1).toList();
 
-      double domestic = 60.0 + _rnd.nextInt(20).toDouble();
-      double export = 100.0 - domestic - _rnd.nextInt(10).toDouble();
+      double domestic = 60.0 + _rnd.nextInt(20).toInt();
+      double export = 100.0 - domestic - _rnd.nextInt(10).toInt();
       salesRatio = {
         '국내 거래': domestic,
         '해외 수출': export,
-        '기타': (100.0 - domestic - export).clamp(5.0, 20.0).toDouble(),
+        '기타': (100.0 - domestic - export).clamp(5, 20).toDouble(),
       };
 
       // 거래처별 매출 랜덤 변경
@@ -60,6 +61,13 @@ class _DashboardPageState extends State<DashboardPage> {
     super.dispose();
   }
 
+  Future<void> _showTestNotification() async {
+    await NotificationService().showInstantNotification(
+      'ERP 시스템 알림',
+      '새로운 매출 데이터가 업데이트되었습니다.',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
@@ -76,6 +84,15 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
             const SizedBox(height: 30),
+            FilledButton(
+              child: const Text('테스트 알림 보내기'),
+              onPressed: () async {
+                await NotificationService().showInstantNotification(
+                  'ERP 시스템',
+                  '테스트 알림이 도착했습니다!',
+                );
+              },
+            ),
             Expanded(
               child: Row(
                 children: [

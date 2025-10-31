@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  fluent_ui: ^4.7.5
+  fluent_ui: ^4.13.0
   fl_chart: ^0.69.0
+  flutter_local_notifications: ^17.1.2
+  timezone: ^0.9.3
 
 dev_dependencies:
   flutter_test:
